@@ -1317,7 +1317,7 @@ function onlCreateRoom(){
   ONL.myId=id;
   ONL.peer.on('open',pid=>{
     ONL.connected=true; ONL.members=[{id:ONL.myId,name:onlMyName()}];
-    ONL.chat('Hệ thống',`Đã tạo phòng ${ONL.code}. Gửi mã này cho bạn bè để vào phòng!`);
+    ONL.chat('Hệ thống',`Đã tạo phòng ${ONL.code}. Gửi mã này cho bạn bè để vào phòng!`); const tEl=document.getElementById('title'); if(tEl) tEl.style.display='none'; const hEl=document.getElementById('hud'); if(hEl) hEl.style.display='flex';
     toast('🌐 Đã tạo phòng: '+ONL.code); renderOnlinePanel();
   });
   ONL.peer.on('connection',conn=>onlHostAttach(conn));
@@ -1349,7 +1349,7 @@ function onlJoinRoom(code){
   ONL.peer.on('open',()=>{
     const conn=ONL.peer.connect(hostId,{reliable:true});
     ONL.hostConn=conn;
-    conn.on('open',()=>{ ONL.connected=true; conn.send({t:'hello',name:onlMyName()}); toast('🌐 Đã vào phòng '+code); renderOnlinePanel(); });
+    conn.on('open',()=>{ ONL.connected=true; conn.send({t:'hello',name:onlMyName()}); const tEl=document.getElementById('title'); if(tEl) tEl.style.display='none'; const hEl=document.getElementById('hud'); if(hEl) hEl.style.display='flex'; toast('🌐 Đã vào phòng '+code); renderOnlinePanel(); });
     conn.on('data',msg=>onlDeliver(msg, hostId));
     conn.on('close',()=>onlHostGone());
     conn.on('error',()=>onlHostGone());
